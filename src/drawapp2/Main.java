@@ -24,6 +24,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
@@ -94,26 +95,21 @@ public class Main extends Application
         System.out.println("test");
         
         AnchorPane topgroup = new AnchorPane();
-
+        topgroup.setMinHeight(400);
+        topgroup.setMinWidth(300);
         
+        // Let's try and remove these below. I don't know if i need the clip if done properly.
         Rectangle clip = new Rectangle(500,440);    // We leave 20 pixels for the bar at the bottom
         topgroup.setClip(clip);
-        
-        topgroup.toBack();
-        //topgroup.getChildren().add(canvas);
-        
-        
-        
+
         BorderPane border = new BorderPane();
-        HBox statusbar = addHBox();
-        statusbar.setMinHeight(60);
-        border.setBottom(statusbar);
+        VBox vertBox = new VBox(0); // spacing = 8
+        TextArea textarea = new TextArea("test");
+        Button close = new Button("Close");
+        vertBox.getChildren().addAll(topgroup, textarea, close);
+
         
-        addStackPane(statusbar); 
-        
-        
-        border.setTop(topgroup);
-        
+        // UNCOMMENT THESE! Or comment if you want to run not through terminal.
         ShapeGenerator shapes = new ShapeGenerator(topgroup);
         Reader reader = new InputStreamReader(System.in);
         Parser parser = new Parser(reader, topgroup);
@@ -122,7 +118,7 @@ public class Main extends Application
         
         
         
-        //Test test = new Test(topgroup);
+        // Test test = new Test(topgroup); // Just draws a circle in topgroup as a test
         //Parser parser = new Parser(reader,imagePanel,main);
         //parser.parse();
 
@@ -134,28 +130,34 @@ public class Main extends Application
         //imagePanel.repaint(); 
         
         border.toFront();
-        StackPane root = new StackPane();
-        //root.getChildren().add(btn);
-        primaryStage.setScene(new Scene(border, 500, 500));
+        //StackPane root = new StackPane();
+        textarea.setText("Drawing finished");
+        
+        primaryStage.setScene(new Scene(vertBox, 500, 500));
         
         primaryStage.show();
     }
   
   public HBox addHBox() {
     HBox hbox = new HBox();
+    
     hbox.setPadding(new Insets(15, 12, 15, 12));
     hbox.setSpacing(10);
     hbox.setStyle("-fx-background-color: #336699;");
 
+    TextArea textarea = new TextArea("test");
+
+    
     Button buttonCurrent = new Button("Current");
     buttonCurrent.setPrefSize(100, 20);
 
     Button buttonProjected = new Button("Projected");
     buttonProjected.setPrefSize(100, 20);
-    hbox.getChildren().addAll(buttonCurrent, buttonProjected);
+    hbox.getChildren().addAll(textarea, buttonCurrent );
 
     return hbox;
 }
+  
   
       private void addStackPane(HBox hb) {
 
