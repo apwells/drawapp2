@@ -12,6 +12,7 @@ import javafx.scene.Group;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import javafx.scene.text.Text;
 
 
 
@@ -53,11 +54,9 @@ public class ShapeGenerator extends JPanel
 
   public void setBackgroundColour(Color colour)
   {
-    //graphics.setColor(colour);
-    Rectangle background = new Rectangle (0,0, appWidth, appHeight);
-    background.setFill(color);
-    //graphics.fillRect(0, 0, image.getWidth(), image.getHeight());
-    //graphics.setColor(Color.black);
+    Rectangle shape = new Rectangle (0,0, appWidth, appHeight);
+    shape.setFill(color);
+    group.getChildren().add(shape);
   }
 
   public void clear(Color colour)
@@ -99,7 +98,9 @@ public class ShapeGenerator extends JPanel
 
   public void drawString(int x, int y, String s)
   {
-    graphics.drawString(s,x,y);
+    Text text = new Text(x, y, s);
+    group.getChildren().add(text);
+    //graphics.drawString(s,x,y);
   }
 
   public void drawArc(int x, int y, int width, int height, int startAngle, int arcAngle)
