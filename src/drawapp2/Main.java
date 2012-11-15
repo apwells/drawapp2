@@ -66,46 +66,23 @@ public class Main extends Application
 //        primaryStage.setHeight(400);
 //        primaryStage.setWidth(400);
 
-        Button btn = new Button();
-        btn.setText("Say 'Hello Worldddd'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
- 
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello Worldd!");
-            }
-        });
-        
-//        Group root = new Group();
-//        Scene s;
-//        s = new Scene(root, 20, 20, Color.RED);
-//        
-        //Rectangle r = new Rectangle(25,25,250,250);
-        //r.setFill(Color.BLUE);
-//
-//        root.getChildren().add(r);
-        
-        
-        
-        //final Canvas canvas = new Canvas(500,300);
-        //GraphicsContext gc = canvas.getGraphicsContext2D();
-
-        //gc.setFill(Color.BLUE);
-        //gc.fillRect(75,75,100,100);
-        System.out.println("test");
-        
         AnchorPane topgroup = new AnchorPane();
-        topgroup.setMinHeight(400);
-        topgroup.setMinWidth(300);
+        topgroup.setMinWidth(500);
+        topgroup.setMinHeight(300);
+        
         
         // Let's try and remove these below. I don't know if i need the clip if done properly.
-        Rectangle clip = new Rectangle(500,440);    // We leave 20 pixels for the bar at the bottom
+        Rectangle clip = new Rectangle(0,0, 500,300);    // We leave 20 pixels for the bar at the bottom
         topgroup.setClip(clip);
 
         BorderPane border = new BorderPane();
         VBox vertBox = new VBox(0); // spacing = 8
+        // Text area setting up
         TextArea textarea = new TextArea("test");
+        textarea.setMinHeight(100);
+        // Close button set up
         Button close = new Button("Close");
+        close.setMinHeight(30);
         vertBox.getChildren().addAll(topgroup, textarea, close);
 
         
@@ -117,23 +94,10 @@ public class Main extends Application
         System.out.println("parser instantiated");
         
         
-        
-        // Test test = new Test(topgroup); // Just draws a circle in topgroup as a test
-        //Parser parser = new Parser(reader,imagePanel,main);
-        //parser.parse();
-
-//root.getChildren().add(canvas);
-        
-        //Reader reader = new InputStreamReader(System.in);
-        //Parser parser = new Parser(reader,imagePanel,main);
-        //parser.parse();
-        //imagePanel.repaint(); 
-        
         border.toFront();
-        //StackPane root = new StackPane();
         textarea.setText("Drawing finished");
         
-        primaryStage.setScene(new Scene(vertBox, 500, 500));
+        primaryStage.setScene(new Scene(vertBox, 500, 440));
         
         primaryStage.show();
     }
