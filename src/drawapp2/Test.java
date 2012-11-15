@@ -5,6 +5,7 @@
 package drawapp2;
 
 import javafx.scene.Group;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 
@@ -14,7 +15,7 @@ import javafx.scene.shape.Ellipse;
  */
 public class Test {
     
-    Test(Group group) {
+    Test(AnchorPane group) {
         Ellipse test = new Ellipse(50,50,50,50);
         test.setFill(Color.RED);
         group.getChildren().add(test);

@@ -37,8 +37,8 @@ import javafx.scene.text.Text;
 public class Main extends Application
 {
     
-    private int appWidth = 500;
-    private int appHeight = 440;
+    private int appWidth;
+    private int appHeight;
     
   public static void main(String[] args)
   {
@@ -69,6 +69,10 @@ public class Main extends Application
         primaryStage.setResizable(false);
 //        primaryStage.setHeight(400);
 //        primaryStage.setWidth(400);
+        
+        Properties properties = new Properties();
+        appWidth = properties.getAppWidth();
+        appHeight = properties.getAppHeight();
 
         AnchorPane topgroup = new AnchorPane();
         
@@ -94,9 +98,9 @@ public class Main extends Application
 
         
         // UNCOMMENT THESE! Or comment if you want to run not through terminal.
-        ShapeGenerator shapes = new ShapeGenerator(topgroup);
+        // ShapeGenerator shapes = new ShapeGenerator(topgroup, appHeight, appWidth); // This isn't used. used in parser.
         Reader reader = new InputStreamReader(System.in);
-        Parser parser = new Parser(reader, topgroup);
+        Parser parser = new Parser(reader, topgroup, properties);
         parser.parse();
         System.out.println("parser instantiated");
         

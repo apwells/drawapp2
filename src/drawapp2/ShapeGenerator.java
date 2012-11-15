@@ -24,10 +24,15 @@ public class ShapeGenerator extends JPanel
   private AnchorPane group;
   private Color color = Color.BLACK;
   private Shape shape;
+  
+  private int appWidth;
+  private int appHeight;
 
-  public ShapeGenerator(AnchorPane group)
+  public ShapeGenerator(AnchorPane group, Properties properties)
   {
       this.group = group;
+      this.appWidth = properties.getAppWidth();
+      this.appHeight = properties.getAppHeight();
   }
 
   private void setImageSize(int width, int height)
@@ -49,7 +54,9 @@ public class ShapeGenerator extends JPanel
   public void setBackgroundColour(Color colour)
   {
     //graphics.setColor(colour);
-    graphics.fillRect(0, 0, image.getWidth(), image.getHeight());
+    Rectangle background = new Rectangle (0,0, appWidth, appHeight);
+    background.setFill(color);
+    //graphics.fillRect(0, 0, image.getWidth(), image.getHeight());
     //graphics.setColor(Color.black);
   }
 

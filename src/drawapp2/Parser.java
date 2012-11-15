@@ -35,10 +35,10 @@ public class Parser
   private Shape shape;
   private AnchorPane group;
   
-  public Parser(Reader reader, AnchorPane group)
+  public Parser(Reader reader, AnchorPane group, Properties properties)
   {
     this.reader = new BufferedReader(reader);
-    this.image = new ShapeGenerator(group);
+    this.image = new ShapeGenerator(group, properties);
     this.group = group;
     //this.frame = frame;
     
