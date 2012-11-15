@@ -21,4 +21,12 @@ public class Properties {
         return appHeight;
     }
     
+    public void setAppWidth(int width){
+        appWidth = width;
+    }
+    
+    public void setAppHeight(int height){
+        appHeight = height;
+    }
+    
 }

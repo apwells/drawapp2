@@ -28,16 +28,23 @@ public class ShapeGenerator extends JPanel
   
   private int appWidth;
   private int appHeight;
+  
+  private Properties properties;
 
   public ShapeGenerator(AnchorPane group, Properties properties)
   {
       this.group = group;
-      this.appWidth = properties.getAppWidth();
-      this.appHeight = properties.getAppHeight();
+      this.properties = properties;
+      this.appWidth = this.properties.getAppWidth();
+      this.appHeight = this.properties.getAppHeight();
+      
   }
 
   private void setImageSize(int width, int height)
   {
+      properties.setAppWidth(width);
+      properties.setAppHeight(height);
+            
     image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     graphics = image.getGraphics();
     //clear(Color.white);
