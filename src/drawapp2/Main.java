@@ -36,6 +36,10 @@ import javafx.scene.text.Text;
 
 public class Main extends Application
 {
+    
+    private int appWidth = 500;
+    private int appHeight = 440;
+    
   public static void main(String[] args)
   {
 //    final MainWindow main = new MainWindow();
@@ -67,12 +71,15 @@ public class Main extends Application
 //        primaryStage.setWidth(400);
 
         AnchorPane topgroup = new AnchorPane();
-        topgroup.setMinWidth(500);
-        topgroup.setMinHeight(300);
+        
+        int topWidth = appHeight - 140;
+        
+        topgroup.setMinWidth(appWidth);
+        topgroup.setMinHeight(topWidth);
         
         
         // Let's try and remove these below. I don't know if i need the clip if done properly.
-        Rectangle clip = new Rectangle(0,0, 500,300);    // We leave 20 pixels for the bar at the bottom
+        Rectangle clip = new Rectangle(0,0, appWidth,topWidth);    // We leave 20 pixels for the bar at the bottom
         topgroup.setClip(clip);
 
         BorderPane border = new BorderPane();
@@ -97,7 +104,7 @@ public class Main extends Application
         border.toFront();
         textarea.setText("Drawing finished");
         
-        primaryStage.setScene(new Scene(vertBox, 500, 440));
+        primaryStage.setScene(new Scene(vertBox, appWidth, appHeight));
         
         primaryStage.show();
     }
