@@ -47,17 +47,22 @@ public class Parser
     
   }
 
-  public void parse()
+  public void parse(boolean all)
   {
     try
     {
         //System.out.println("parser constructor going");
         //drawOval("DO 50 50 50 50\n");
       String line = reader.readLine();
-      while (line != null)
-      {
-        parseLine(line);
-        line = reader.readLine();
+      if (all) {    // If statement to allow stepping through
+        while (line != null)
+        {
+          parseLine(line);
+          line = reader.readLine();
+        }
+      } else if (line != null) {
+          parseLine(line);
+          line = reader.readLine();
       }
     }
     catch (IOException e)

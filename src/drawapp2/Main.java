@@ -88,22 +88,46 @@ public class Main extends Application
 
         BorderPane border = new BorderPane();
         VBox vertBox = new VBox(0); // spacing = 8
+        HBox buttonBox = new HBox(5);
         // Text area setting up
         TextArea textarea = new TextArea("test");
         textarea.setMinHeight(100);
-        // Close button set up
+        // Setup the buttons
+        Button next = new Button("Next step");
+        Button finish = new Button("Finish draw");
         Button close = new Button("Close");
-        close.setMinHeight(30);
-        vertBox.getChildren().addAll(topgroup, textarea, close);
+        //close.setMinHeight(30);
+        buttonBox.getChildren().addAll(next,finish,close);
+        buttonBox.alignmentProperty().set(Pos.CENTER);
+        vertBox.getChildren().addAll(topgroup, textarea, buttonBox);
 
         
         // UNCOMMENT THESE! Or comment if you want to run not through terminal.
         // ShapeGenerator shapes = new ShapeGenerator(topgroup, appHeight, appWidth); // This isn't used. used in parser.
         Reader reader = new InputStreamReader(System.in);
-        Parser parser = new Parser(reader, topgroup, properties);
-        parser.parse();
+        final Parser parser = new Parser(reader, topgroup, properties);
+        parser.parse(true);
         System.out.println("parser instantiated");
         
+        // Give the buttons actions
+        next.setOnAction(new EventHandler<ActionEvent>() {
+        @Override 
+        public void handle(ActionEvent e) {
+            parser.parse(false);
+            }
+        });
+        finish.setOnAction(new EventHandler<ActionEvent>() {
+        @Override 
+        public void handle(ActionEvent e) {
+            parser.parse(true);
+            }
+        });
+        close.setOnAction(new EventHandler<ActionEvent>() {
+        @Override 
+        public void handle(ActionEvent e) {
+            System.exit(0);
+            }
+        });
         
         border.toFront();
         textarea.setText("Drawing finished");

@@ -45,10 +45,10 @@ public class ShapeGenerator extends JPanel
       properties.setAppWidth(width);
       properties.setAppHeight(height);
             
-    image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-    graphics = image.getGraphics();
+    //image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+    //graphics = image.getGraphics();
     //clear(Color.white);
-    setPreferredSize(new Dimension(width, height));
+    //setPreferredSize(new Dimension(width, height));
   }
 
   @Override
