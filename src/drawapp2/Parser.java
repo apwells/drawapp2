@@ -89,7 +89,7 @@ public class Parser
     if (command.equals("DS")) { drawString(line.substring(3, line.length())); return; }
     if (command.equals("DA")) { drawArc(line.substring(2, line.length())); return; }
     if (command.equals("DO")) { drawOval(line.substring(2, line.length())); return; }
-    
+    if (command.equals("SG")) { setGradient(line.substring(2, line.length())); return; }
 
 
     throw new ParseException("Unknown drawing command");
