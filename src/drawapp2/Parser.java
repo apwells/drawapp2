@@ -199,6 +199,24 @@ public class Parser
     s = args.substring(position+1,args.length());
     image.drawString(x,y,s);
   }
+  
+  private void drawImage(String args) throws ParseException
+  {
+      int x = 0;
+      int y = 0;
+      int width = 0;
+      int height = 0;
+      String file = "";
+      StringTokenizer tokenizer = new StringTokenizer(args);
+      x = getInteger(tokenizer);
+      y = getInteger(tokenizer);
+      width = getInteger(tokenizer);
+      height = getInteger(tokenizer);
+      file = tokenizer.nextToken();
+    int position = args.indexOf("@");
+    if (position == -1) throw new ParseException("DrawImage file string is missing");
+    image.drawImage(x, y, width, height, file);
+  }
 
   private void setColour(String colourName) throws ParseException
   {
