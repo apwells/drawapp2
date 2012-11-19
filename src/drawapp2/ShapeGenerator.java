@@ -9,6 +9,8 @@ import java.awt.image.BufferedImage;
 
 
 import javafx.scene.Group;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
@@ -64,6 +66,22 @@ public class ShapeGenerator extends JPanel
     Rectangle shape = new Rectangle (0,0, appWidth, appHeight);
     shape.setFill(color);
     group.getChildren().add(shape);
+  }
+  
+  public void drawImage(int x, int y, int width, int height, String fileName)
+  {
+      ImageView iv = new ImageView();
+      Image image = new Image("drawapp2/"+fileName);
+      
+      iv.setImage(image);
+      iv.setX(x);
+      iv.setY(y);
+      iv.setFitWidth(width);
+      iv.setFitHeight(height);
+      iv.setPreserveRatio(false);
+      iv.setSmooth(true); // Not sure what this does. Anti aliases perhaps?
+      
+      group.getChildren().add(iv);
   }
 
   public void clear(Color colour)

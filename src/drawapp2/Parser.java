@@ -62,7 +62,7 @@ public class Parser
         }
       } else if (line != null) {
           parseLine(line);
-          line = reader.readLine();
+          //line = reader.readLine();
       }
     }
     catch (IOException e)

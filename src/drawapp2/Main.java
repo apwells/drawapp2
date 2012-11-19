@@ -106,8 +106,12 @@ public class Main extends Application
         // ShapeGenerator shapes = new ShapeGenerator(topgroup, appHeight, appWidth); // This isn't used. used in parser.
         Reader reader = new InputStreamReader(System.in);
         final Parser parser = new Parser(reader, topgroup, properties);
-        parser.parse(true);
+        // parser.parse(true); // This simply parses the whole drawing. Disable this for step through
         System.out.println("parser instantiated");
+        
+        // TODO : Delete me. this is just a test for imagedraw
+        ShapeGenerator test = new ShapeGenerator(topgroup, properties);
+        test.drawImage(50,50,100,200,"image.jpeg");
         
         // Give the buttons actions
         next.setOnAction(new EventHandler<ActionEvent>() {
