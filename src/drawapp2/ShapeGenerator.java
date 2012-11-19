@@ -82,12 +82,16 @@ public class ShapeGenerator extends JPanel
     gradientFill = true; // The next filled shape will be with this gradient
   }
   
-  public void drawImage(int x, int y, int width, int height, String fileName)
+  public void drawImage(int x, int y, int width, int height, String fileName) throws IllegalArgumentException
   {
       ImageView iv = new ImageView();
-      Image image = new Image("drawapp2/"+fileName);
-      
+      try {
+      Image image = new Image(fileName);
       iv.setImage(image);
+      } catch (IllegalArgumentException e) {
+          System.out.println("Invalid URL for image!"+fileName);
+      }
+      
       iv.setX(x);
       iv.setY(y);
       iv.setFitWidth(width);

@@ -90,7 +90,7 @@ public class Parser
     if (command.equals("DA")) { drawArc(line.substring(2, line.length())); return; }
     if (command.equals("DO")) { drawOval(line.substring(2, line.length())); return; }
     if (command.equals("SG")) { setGradient(line.substring(2, line.length())); return; }
-
+    if (command.equals("DI")) { drawImage(line.substring(2, line.length())); return; }
 
     throw new ParseException("Unknown drawing command");
   }
@@ -213,8 +213,8 @@ public class Parser
       width = getInteger(tokenizer);
       height = getInteger(tokenizer);
       file = tokenizer.nextToken();
-    int position = args.indexOf("@");
-    if (position == -1) throw new ParseException("DrawImage file string is missing");
+    //int position = args.indexOf("@");
+    //if (position == -1) throw new ParseException("DrawImage file string is missing");
     image.drawImage(x, y, width, height, file);
   }
 
