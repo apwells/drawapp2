@@ -110,8 +110,11 @@ public class Main extends Application
         System.out.println("parser instantiated");
         
         // TODO : Delete me. this is just a test for imagedraw
-        ShapeGenerator test = new ShapeGenerator(topgroup, properties);
-        test.drawImage(50,50,100,200,"image.jpeg");
+        //ShapeGenerator test = new ShapeGenerator(topgroup, properties);
+        //test.drawImage(50,50,100,200,"image.jpeg");
+        
+        //test.setGradient(Color.AQUA, Color.GREEN);
+        //test.fillRect(150, 150, 50, 50);
         
         // Give the buttons actions
         next.setOnAction(new EventHandler<ActionEvent>() {

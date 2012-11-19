@@ -89,6 +89,7 @@ public class Parser
     if (command.equals("DS")) { drawString(line.substring(3, line.length())); return; }
     if (command.equals("DA")) { drawArc(line.substring(2, line.length())); return; }
     if (command.equals("DO")) { drawOval(line.substring(2, line.length())); return; }
+    
 
 
     throw new ParseException("Unknown drawing command");
@@ -201,21 +202,48 @@ public class Parser
 
   private void setColour(String colourName) throws ParseException
   {
-    if (colourName.equals("black")) { image.setColour(Color.BLACK); return;}
-    if (colourName.equals("blue")) { image.setColour(Color.BLUE); return;}
-    if (colourName.equals("cyan")) { image.setColour(Color.CYAN); return;}
-    if (colourName.equals("darkgray")) { image.setColour(Color.DARKGRAY); return;}
-    if (colourName.equals("gray")) { image.setColour(Color.GRAY); return;}
-    if (colourName.equals("green")) { image.setColour(Color.GREEN); return;}
-    if (colourName.equals("lightgray")) { image.setColour(Color.LIGHTGRAY); return;}
-    if (colourName.equals("magenta")) { image.setColour(Color.MAGENTA); return;}
-    if (colourName.equals("orange")) { image.setColour(Color.ORANGE); return;}
-    if (colourName.equals("pink")) { image.setColour(Color.PINK); return;}
-    if (colourName.equals("red")) { image.setColour(Color.RED); return;}
-    if (colourName.equals("white")) { image.setColour(Color.WHITE); return;}
-    if (colourName.equals("yellow")) { image.setColour(Color.YELLOW); return;}
-    throw new ParseException("Invalid colour name");
+    try {
+    image.setColour(returnColour(colourName));
+    } catch (ParseException e) {
+    System.err.println("Caught illegal colour name in setColour");
+    }
   }
+  
+    private void setGradient(String args) throws ParseException
+  {
+    String colour1 = "red";
+    String colour2 = "blue";
+      
+    StringTokenizer tokenizer = new StringTokenizer(args);
+    colour1 = tokenizer.nextToken();
+    colour2 = tokenizer.nextToken();
+    
+    try {
+    image.setGradient(returnColour(colour1), returnColour(colour2));
+    } catch (ParseException e) {
+    System.err.println("Caught illegal colour name in setGradient");
+    }
+  }
+    
+    private Color returnColour (String colourName) throws ParseException 
+    {
+        Color colour;
+    if (colourName.equals("black")) { colour = Color.BLACK; return colour;}
+    if (colourName.equals("blue")) { colour = Color.BLUE; return colour;}
+    if (colourName.equals("cyan")) { colour = Color.CYAN; return colour;}
+    if (colourName.equals("darkgray")) { colour = Color.DARKGRAY; return colour;}
+    if (colourName.equals("gray")) { colour = Color.GRAY; return colour;}
+    if (colourName.equals("green")) { colour = Color.GREEN; return colour;}
+    if (colourName.equals("lightgray")) { colour = Color.LIGHTGRAY; return colour;}
+    if (colourName.equals("magenta")) { colour = Color.MAGENTA; return colour;}
+    if (colourName.equals("orange")) { colour = Color.ORANGE; return colour;}
+    if (colourName.equals("pink")) { colour = Color.PINK; return colour;}
+    if (colourName.equals("red")) { colour = Color.RED; return colour;}
+    if (colourName.equals("white")) { colour = Color.WHITE; return colour;}
+    if (colourName.equals("yellow")) { colour = Color.YELLOW; return colour;}
+    
+    throw new ParseException("Invalid colour name");
+    }
 
   private int getInteger(StringTokenizer tokenizer) throws ParseException
   {

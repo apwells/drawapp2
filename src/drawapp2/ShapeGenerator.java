@@ -13,6 +13,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.*;
 import javafx.scene.text.Text;
 
@@ -26,6 +29,11 @@ public class ShapeGenerator extends JPanel
   private Graphics graphics;
   private AnchorPane group;
   private Color color = Color.BLACK;
+  
+  Stop[] stops = new Stop[] { new Stop(0, Color.BLACK), new Stop(1, Color.RED)};
+  private LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
+  private boolean gradientFill = false;
+  
   private Shape shape;
   
   private int appWidth;
@@ -68,6 +76,12 @@ public class ShapeGenerator extends JPanel
     group.getChildren().add(shape);
   }
   
+  public void setGradient(Color colour1, Color colour2) {
+    Stop[] stops = new Stop[] { new Stop(0, colour1), new Stop(1, colour2)};
+    lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
+    gradientFill = true; // The next filled shape will be with this gradient
+  }
+  
   public void drawImage(int x, int y, int width, int height, String fileName)
   {
       ImageView iv = new ImageView();
@@ -92,6 +106,7 @@ public class ShapeGenerator extends JPanel
   public void setColour(Color colour)
   {
     this.color = colour;
+    gradientFill = false; // The next filled shape will be with this colour.
   }
 
   public void drawLine(int x1, int y1, int x2, int y2)
@@ -116,7 +131,11 @@ public class ShapeGenerator extends JPanel
   public void fillRect(int x1, int y1, int x2, int y2)
   {
     shape = new Rectangle(x1, y1, x2, y2);
-    shape.setFill(this.color);
+    if (gradientFill){
+        shape.setFill(this.lg1);
+    } else {
+        shape.setFill(this.color);
+    }
     group.getChildren().add(shape);
     System.out.println("FillRect drawn");
   }
