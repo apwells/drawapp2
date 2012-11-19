@@ -34,9 +34,11 @@ public class Parser
   //private MainWindow frame;
   private Shape shape;
   private AnchorPane group;
+  private Properties properties;
   
   public Parser(Reader reader, AnchorPane group, Properties properties)
   {
+      this.properties = properties;
     this.reader = new BufferedReader(reader);
     this.image = new ShapeGenerator(group, properties);
     this.group = group;
@@ -91,10 +93,24 @@ public class Parser
     if (command.equals("DO")) { drawOval(line.substring(2, line.length())); return; }
     if (command.equals("SG")) { setGradient(line.substring(2, line.length())); return; }
     if (command.equals("DI")) { drawImage(line.substring(2, line.length())); return; }
+    if (command.equals("SD")) { setDimensions(line.substring(2, line.length())); return; }
 
     throw new ParseException("Unknown drawing command");
   }
 
+  private void setDimensions(String args) throws ParseException {
+      int width = 400;
+      int height = 400;
+      
+    StringTokenizer tokenizer = new StringTokenizer(args);
+    width = getInteger(tokenizer);
+    height = getInteger(tokenizer);
+    
+    properties.setAppWidth(width);
+    properties.setAppHeight(height);
+      
+  }
+  
   private void drawLine(String args) throws ParseException
   {
     int x1 = 0;

@@ -39,6 +39,10 @@ public class Main extends Application
     
     private int appWidth;
     private int appHeight;
+    private Properties properties;
+    private AnchorPane topgroup;
+    private Scene scene;
+    private Stage primaryStage;
     
   public static void main(String[] args)
   {
@@ -70,21 +74,11 @@ public class Main extends Application
 //        primaryStage.setHeight(400);
 //        primaryStage.setWidth(400);
         
-        Properties properties = new Properties();
-        appWidth = properties.getAppWidth();
-        appHeight = properties.getAppHeight();
-
-        AnchorPane topgroup = new AnchorPane();
+        properties = new Properties();
+        this.primaryStage = primaryStage;
+        topgroup = new AnchorPane();
         
-        int topWidth = appHeight - 140;
-        
-        topgroup.setMinWidth(appWidth);
-        topgroup.setMinHeight(topWidth);
-        
-        
-        // Let's try and remove these below. I don't know if i need the clip if done properly.
-        Rectangle clip = new Rectangle(0,0, appWidth,topWidth);    // We leave 20 pixels for the bar at the bottom
-        topgroup.setClip(clip);
+        setDimensions();
 
         BorderPane border = new BorderPane();
         VBox vertBox = new VBox(0); // spacing = 8
@@ -121,25 +115,29 @@ public class Main extends Application
         @Override 
         public void handle(ActionEvent e) {
             parser.parse(false);
+            setDimensions();
             }
         });
         finish.setOnAction(new EventHandler<ActionEvent>() {
         @Override 
         public void handle(ActionEvent e) {
             parser.parse(true);
+            setDimensions();
             }
         });
         close.setOnAction(new EventHandler<ActionEvent>() {
         @Override 
         public void handle(ActionEvent e) {
             System.exit(0);
+            setDimensions();
             }
         });
         
         border.toFront();
         textarea.setText("Drawing finished");
+        scene = new Scene(vertBox, appWidth, appHeight);
         
-        primaryStage.setScene(new Scene(vertBox, appWidth, appHeight));
+        primaryStage.setScene(scene);
         
         primaryStage.show();
     }
@@ -195,6 +193,22 @@ public class Main extends Application
                 
     }
   
-  
+  private void setDimensions() {
+        appWidth = properties.getAppWidth();
+        appHeight = properties.getAppHeight();
+        
+        primaryStage.setWidth(appWidth);
+        primaryStage.setHeight(appHeight);
+ 
+        int topWidth = appHeight - 140;
+        
+        topgroup.setMinWidth(appWidth);
+        topgroup.setMinHeight(topWidth);
+        
+        
+        // Let's try and remove these below. I don't know if i need the clip if done properly.
+        Rectangle clip = new Rectangle(0,0, appWidth,topWidth);    // We leave 20 pixels for the bar at the bottom
+        topgroup.setClip(clip);
+  }
 
 }

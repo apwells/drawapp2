@@ -10,8 +10,8 @@ package drawapp2;
  */
 public class Properties {
     
-    private int appWidth = 500;
-    private int appHeight = 440;
+    private int appWidth = 600;
+    private int appHeight = 540;
     
     public int getAppWidth() {
         return appWidth;
